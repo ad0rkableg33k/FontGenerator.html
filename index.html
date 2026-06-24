@@ -735,11 +735,19 @@ const styles = {
     return r;
   },
 
-  // Box Word: each letter wrapped in square brackets (word-by-word)
+  // Box Word: small caps letters with over+underline diacritics, word wrapped in [ ]
   "102. Box Word": (input) => {
+    const smallCaps = ["ᴀ","ʙ","ᴄ","ᴅ","ᴇ","ꜰ","ɢ","ʜ","ɪ","ᴊ","ᴋ","ʟ","ᴍ","ɴ","ᴏ","ᴘ","Q","ʀ","ꜱ","ᴛ","ᴜ","ᴠ","ᴡ","x","ʏ","ᴢ","ᴀ","ʙ","ᴄ","ᴅ","ᴇ","ꜰ","ɢ","ʜ","ɪ","ᴊ","ᴋ","ʟ","ᴍ","ɴ","ᴏ","ᴘ","Q","ʀ","ꜱ","ᴛ","ᴜ","ᴠ","ᴡ","x","ʏ","ᴢ","0","1","2","3","4","5","6","7","8","9"];
+    const BOX = "̲̅"; // combining underline + overline
     return input.split(" ").map(word => {
       if (!word) return "";
-      return "[" + word + "]";
+      let boxed = "";
+      for (let c of word) {
+        const i = normal.indexOf(c);
+        const ch = i !== -1 ? smallCaps[i] : c;
+        boxed += ch + BOX;
+      }
+      return "[" + boxed + "]";
     }).join(" ");
   },
 
