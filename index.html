@@ -230,6 +230,18 @@
   }
   .card:hover::before { opacity: 1; }
 
+  /* Click-to-copy hint */
+  .card-name::after {
+    content: ' ✦ click to copy';
+    font-size: 0.62rem;
+    color: var(--pink);
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-style: italic;
+  }
+  .card:hover .card-name::after { opacity: 0.7; }
+  .card.copied .card-name::after { content: ' ✦ copied!'; opacity: 1; }
+
   .card.copied {
     border-color: var(--pink) !important;
     box-shadow: 0 0 24px var(--pink-glow) !important;
@@ -723,14 +735,12 @@ const styles = {
     return r;
   },
 
-  // Box Word: each letter wrapped in box-drawing brackets
+  // Box Word: each letter wrapped in square brackets (word-by-word)
   "102. Box Word": (input) => {
-    let r = "";
-    for (let c of input) {
-      if (c === " ") { r += " "; continue; }
-      r += "【" + c + "】";
-    }
-    return r;
+    return input.split(" ").map(word => {
+      if (!word) return "";
+      return "[" + word + "]";
+    }).join(" ");
   },
 
   // Sans-serif Intermixed: alternates bold sans and regular sans per char
@@ -856,21 +866,11 @@ function render() {
     const actions = document.createElement('div');
     actions.className = 'card-actions';
 
-    // Copy plain
-    const btnPlain = document.createElement('button');
-    btnPlain.className = 'action-btn';
-    btnPlain.textContent = 'copy';
-    btnPlain.title = 'Copy font only';
-    btnPlain.addEventListener('click', e => {
-      e.stopPropagation();
-      copyText(converted, card);
-    });
-
-    // Copy with decorator
+    // Copy with decorator (only shown when a decorator is active)
     const btnDec = document.createElement('button');
     btnDec.className = 'action-btn';
     btnDec.title = 'Copy with decorator';
-    btnDec.textContent = activeDecorator ? 'copy +deco' : 'copy+deco';
+    btnDec.textContent = 'copy +deco';
     btnDec.style.display = activeDecorator ? 'inline-block' : 'none';
     btnDec.addEventListener('click', e => {
       e.stopPropagation();
@@ -894,7 +894,6 @@ function render() {
       actions.appendChild(btnReroll);
     }
 
-    actions.appendChild(btnPlain);
     actions.appendChild(btnDec);
 
     hdr.appendChild(nameEl);
