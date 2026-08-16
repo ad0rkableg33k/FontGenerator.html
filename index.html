@@ -445,7 +445,8 @@
     <button class="dec-btn" data-wrap="🩸 {text} 🩸" title="Blood drop">🩸</button>
     <button class="dec-btn" data-wrap="♱ {text} ♱" title="East cross">♱</button>
     <button class="dec-btn" data-wrap="［ｒｏｏｔ⁄  {text} ․ₑₓₑ］" title="Fancy frame">［ｒｏｏｔ⁄(your text here)․ₑₓₑ］</button>
-<button class="dec-btn" data-wrap="staff-chat" title="Channel name">✩・chαииєℓ иαмє・✩</button>
+<button class="dec-btn" data-wrap="staff-chat" title="Channel name">✩・chαииєℓ✩иαмє</button>
+<button class="dec-btn" data-wrap="skullz" title="Channel name">☠・chαииєℓ☠иαмє</button>
   </div>
 
 
@@ -899,6 +900,15 @@ function applyDecorator(text, template) {
   if (!template || !text) return text;
   if (template === 'staff-chat') {
     return '✩・' + text.trim().split(/\s+/).join('✩');
+  }
+  return template.replace('{text}', text);
+}
+
+// ── Apply decorator ──
+function applyDecorator(text, template) {
+  if (!template || !text) return text;
+  if (template === 'skullz') {
+    return '☠・' + text.trim().split(/\s+/).join('☠');
   }
   return template.replace('{text}', text);
 }
