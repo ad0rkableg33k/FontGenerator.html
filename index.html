@@ -909,12 +909,6 @@ function applyDecorator(text, template) {
   if (template === 'stars') {
     return '✩・' + text.trim().split(/\s+/).join('✩');
   }
-  return template.replace('{text}', text);
-}
-
-// ── Apply decorator ──
-function applyDecorator(text, template) {
-  if (!template || !text) return text;
   if (template === 'skullz') {
     return '☠・' + text.trim().split(/\s+/).join('・');
   }
