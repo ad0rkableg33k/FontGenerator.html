@@ -446,7 +446,12 @@
     <button class="dec-btn" data-wrap="♱ {text} ♱" title="East cross">♱</button>
     <p><button class="dec-btn" data-wrap="［ｒｏｏｔ⁄  {text} ․ₑₓₑ］" title="Fancy frame">［ｒｏｏｔ⁄(your text here)․ₑₓₑ］</button>
 <button class="dec-btn" data-wrap="stars" title="Channel name">✩・chαииєℓ✩иαмє</button>
-<button class="dec-btn" data-wrap="skullz" title="Channel name">☠・chαииєℓ・иαмє</button></p>
+<button class="dec-btn" data-wrap="skullz" title="Channel name">☠・chαииєℓ・иαмє</button>
+<button class="dec-btn" data-wrap="heartstar" title="Channel name">🎔・ᥴнʌηηє𝓵・иαмє</button>
+<button class="dec-btn" data-wrap="pentagram" title="Channel name">⛧・ᥴнʌηηє𝓵・иαмє</button>
+<button class="dec-btn" data-wrap="fancyheart" title="Channel name">♡・ᥴнʌηηє𝓵・иαмє</button>
+<button class="dec-btn" data-wrap="ankh" title="Channel name">☥・ᥴнʌηηє𝓵・иαмє</button>
+<button class="dec-btn" data-wrap="diamond" title="Channel name">♢・ᥴнʌηηє𝓵・иαмє</button></p>
   </div>
 
 
@@ -918,6 +923,21 @@ function applyDecorator(text, template) {
   }
   if (template === 'skullz') {
     return '☠・' + text.trim().split(/\s+/).join('・');
+  }
+  if (template === 'heartstar') {
+    return '🎔・' + text.trim().split(/\s+/).join('・');
+  }
+  if (template === 'pentagram') {
+    return '⛧・' + text.trim().split(/\s+/).join('・');
+  }
+  if (template === 'fancyheart') {
+    return '♡・' + text.trim().split(/\s+/).join('・');
+  }
+  if (template === 'ankh') {
+    return '☥・' + text.trim().split(/\s+/).join('・');
+  }
+  if (template === 'diamond') {
+    return '♢・' + text.trim().split(/\s+/).join('・');
   }
   return template.replace('{text}', text);
 }
