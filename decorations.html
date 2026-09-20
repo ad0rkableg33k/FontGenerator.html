@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✦ Text Decorations ✦ Fancy Font Generator</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=MedievalSharp&display=swap');
+
+  :root {
+    --bg:        #0a0007;
+    --bg2:       #110010;
+    --card:      #180016;
+    --card-hover:#220020;
+    --border:    #3a0038;
+    --pink:      #ff2d78;
+    --pink-dim:  #c4005a;
+    --pink-glow: #ff2d7844;
+    --magenta:   #ff00cc;
+    --text:      #f0d0f5;
+    --muted:     #9966aa;
+    --copied:    #ff2d78;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI Symbol","Noto Sans","Noto Sans Symbols","Arial Unicode MS",
+      "Times New Roman","Lucida Console","Courier New",monospace,serif,sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Drippy top border ── */
+  body::before {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(90deg, var(--pink), var(--magenta), var(--pink));
+    box-shadow: 0 0 18px 4px var(--pink-glow);
+  }
+
+  /* ── Site Nav ── */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: rgba(10,0,8,0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--pink);
+    box-shadow: 0 0 20px var(--pink-glow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .site-nav .nav-logo {
+    font-family: 'Bebas Neue', "Segoe UI Symbol", sans-serif;
+    font-size: 1.4rem;
+    color: var(--pink);
+    text-shadow: 0 0 12px var(--pink);
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+
+  .site-nav .nav-links {
+    display: flex;
+    gap: 0.2rem;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+
+  .site-nav .nav-links a {
+    font-family: 'Bebas Neue', "Segoe UI Symbol", sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .site-nav .nav-links a:hover, .site-nav .nav-links a.active {
+    color: var(--pink);
+    border-color: var(--pink);
+    text-shadow: 0 0 8px var(--pink);
+    background: rgba(255,45,120,0.08);
+  }
+
+  /* ── Header ── */
+  header {
+    text-align: center;
+    padding: 2rem 1rem 1.2rem;
+    position: relative;
+  }
+
+  .skull-row {
+    font-size: 1.4rem;
+    letter-spacing: 0.3rem;
+    opacity: 0.55;
+    margin-bottom: 0.5rem;
+    user-select: none;
+  }
+
+  header h1 {
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    background: linear-gradient(135deg, var(--pink), var(--magenta), #ff80d5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 14px var(--pink));
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+  }
+
+  .byline {
+    margin-top: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .divider {
+    margin: 1.2rem auto 0;
+    width: 80%;
+    max-width: 600px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--pink), transparent);
+    opacity: 0.5;
+  }
+
+  /* ── Sticky controls ── */
+  .controls-zone {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1.2rem;
+    box-shadow: 0 4px 20px #000a;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  #search {
+    flex: 1;
+    min-width: 180px;
+    max-width: 400px;
+    background: #0e000d;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  #search:focus {
+    border-color: var(--pink);
+    box-shadow: 0 0 0 2px var(--pink-glow);
+  }
+  #search::placeholder { color: var(--muted); }
+
+  .cat-filters {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .cat-btn {
+    background: #1a0018;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    font-family: inherit;
+    letter-spacing: 0.05em;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .cat-btn:hover {
+    color: var(--text);
+    border-color: var(--pink-dim);
+    background: #220020;
+  }
+  .cat-btn.active {
+    background: #3a003a;
+    border-color: var(--pink);
+    color: var(--pink);
+    box-shadow: 0 0 8px var(--pink-glow);
+  }
+
+  /* ── Main layout ── */
+  .page-body {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1.2rem 1rem 3rem;
+  }
+
+  /* ── Section heading ── */
+  .section-heading {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--pink);
+    opacity: 0.8;
+    margin: 1.6rem 0 0.6rem;
+    padding-left: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--pink-dim), transparent);
+    opacity: 0.4;
+  }
+
+  /* ── Card grid ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.65rem;
+  }
+
+  /* ── Decoration card ── */
+  .dec-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.8rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+  }
+
+  .dec-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--pink), var(--magenta));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .dec-card:hover {
+    border-color: var(--pink-dim);
+    box-shadow: 0 0 16px var(--pink-glow);
+    background: var(--card-hover);
+  }
+  .dec-card:hover::before { opacity: 1; }
+
+  .dec-card.copied {
+    border-color: var(--pink) !important;
+    box-shadow: 0 0 24px var(--pink-glow) !important;
+    background: #2a0028 !important;
+  }
+  .dec-card.copied::before { opacity: 1 !important; }
+
+  /* Card label row */
+  .dec-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+  }
+
+  .dec-label-text {
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex: 1;
+  }
+
+  /* The big copy button */
+  .copy-btn {
+    background: #2a0028;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.72rem;
+    padding: 0.2rem 0.55rem;
+    font-family: inherit;
+    letter-spacing: 0.04em;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .copy-btn:hover {
+    color: var(--pink);
+    border-color: var(--pink);
+    background: #3a0038;
+  }
+
+  /* The decoration text itself */
+  .dec-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    word-break: break-word;
+    color: #f5e0ff;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+  }
+
+  /* Hover hint */
+  .dec-label-text::after {
+    content: ' ✦ click to copy';
+    color: var(--pink);
+    opacity: 0;
+    font-style: italic;
+    transition: opacity 0.2s;
+    text-transform: none;
+    font-size: 0.62rem;
+  }
+  .dec-card:hover .dec-label-text::after { opacity: 0.7; }
+  .dec-card.copied .dec-label-text::after { content: ' ✦ copied!'; opacity: 1; }
+
+  /* ── Toast ── */
+  #toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--pink);
+    color: #000;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    box-shadow: 0 0 20px var(--pink);
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+    white-space: nowrap;
+  }
+  #toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    opacity: 0.6;
+  }
+
+  /* ── Empty state ── */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+    font-size: 1.8rem;
+    opacity: 0.4;
+  }
+
+  /* ── Count badge ── */
+  .result-count {
+    font-size: 0.7rem;
+    color: var(--muted);
+    opacity: 0.7;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html">𝔽𝖆𝖓𝖈𝕪 𝔽𝖔𝖓𝕥 𝕲𝖊𝖓𝖊𝖗𝕒𝕥𝖔𝖗</a>
+  <ul class="nav-links">
+    <li><a href="https://ad0rkableg33k.github.io/Nightwood-Oracle/" target="_blank">𝕌ηѕ𝕠ℓι𝕔ιтє𝕕 ᦔєᥴк 𝓅𝖎𝒸𝖘|τⲇⲅⲟτ &amp; ⲟⲅⲇⲥⳑⲉ</a></li>
+    <li><a href="https://ad0rkableg33k.github.io/realityisbuffering/" target="_blank">яєʌ𝓵ɪтყ ɪѕ вuƒƒєяɪηｇ</a></li>
+    <li><a href="index.html">𝔽𝖔𝖓𝕥 𝕲𝖊𝖓𝖊𝖗𝕒𝕥𝖔𝖗</a></li>
+    <li><a href="decorations.html" class="active">✦ ᦔєᥴ০ᥲɾⲇτɪoηѕ ✦</a></li>
+    <li><a href="https://github.com/ad0rkableg33k" target="_blank">ＧｉｔＨＵＢ</a></li>
+    <li><a href="https://www.youtube.com/@ad0rkableg33k" target="_blank">ყoυtυbᥱ</a></li>
+  </ul>
+</nav>
+
+<header>
+  <div class="skull-row">✦ ☠ ⛧ 🕸 ⛧ ☠ ✦</div>
+  <h1>✦ Text Decorations ✦</h1>
+  <div class="byline">✦ click any card to copy ✦ created by G33KY ✦</div>
+  <div class="divider"></div>
+</header>
+
+<div class="controls-zone">
+  <input id="search" type="text" placeholder="🔍 search decorations...">
+  <div class="cat-filters" id="catFilters">
+    <button class="cat-btn active" data-cat="all">All</button>
+    <button class="cat-btn" data-cat="dividers">Dividers</button>
+    <button class="cat-btn" data-cat="borders">Borders</button>
+    <button class="cat-btn" data-cat="namestyle">Name Styles</button>
+    <button class="cat-btn" data-cat="spooky">Spooky</button>
+    <button class="cat-btn" data-cat="stars">Stars &amp; Hearts</button>
+    <button class="cat-btn" data-cat="kawaii">Kawaii</button>
+    <button class="cat-btn" data-cat="kaomoji">Kaomoji</button>
+    <button class="cat-btn" data-cat="symbols">Symbols</button>
+    <button class="cat-btn" data-cat="arrows">Arrows</button>
+  </div>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="page-body" id="pageBody"></div>
+
+<div id="toast"></div>
+
+<footer>✦ part of the <a href="https://github.com/ad0rkableg33k" style="color:var(--pink);text-decoration:none;">ad0rkableg33k</a> creative universe ✦</footer>
+
+<script>
+// ──────────────────────────────────────────────
+// DECORATION DATA
+// Each entry: { label, text, cat }
+// cat matches the data-cat on filter buttons
+// ──────────────────────────────────────────────
+const decorations = [
+
+  // ── DIVIDERS ──
+  { label: "Skull Line",          cat: "dividers", text: "☠︎━━━━━━━━━━━━━━━━☠︎" },
+  { label: "Star Line",           cat: "dividers", text: "✦━━━━━━━━━━━━━━━━✦" },
+  { label: "Diamond Line",        cat: "dividers", text: "◆━━━━━━━━━━━━━━━━◆" },
+  { label: "Pentagram Line",      cat: "dividers", text: "⛧━━━━━━━━━━━━━━━━⛧" },
+  { label: "Heart Line",          cat: "dividers", text: "♡━━━━━━━━━━━━━━━━♡" },
+  { label: "Cross Line",          cat: "dividers", text: "✝━━━━━━━━━━━━━━━━✝" },
+  { label: "Moon Line",           cat: "dividers", text: "☽━━━━━━━━━━━━━━━━☾" },
+  { label: "Bat Line",            cat: "dividers", text: "🦇━━━━━━━━━━━━━━━━🦇" },
+  { label: "Spider Line",         cat: "dividers", text: "🕷🕸━━━━━━━━━━━━━━🕸🕷" },
+  { label: "Coffin Line",         cat: "dividers", text: "⚰️━━━━━━━━━━━━━━━━⚰️" },
+  { label: "Thorn Line",          cat: "dividers", text: "❧━━━━━━━━━━━━━━━━❧" },
+  { label: "Ankh Line",           cat: "dividers", text: "☥━━━━━━━━━━━━━━━━☥" },
+  { label: "Rose Line",           cat: "dividers", text: "🥀・・・・・・・・・・・・🥀" },
+  { label: "Blood Drop Line",     cat: "dividers", text: "🩸━━━━━━━━━━━━━━━━🩸" },
+  { label: "Eye Line",            cat: "dividers", text: "👁‍🗨━━━━━━━━━━━━━━━━👁‍🗨" },
+  { label: "Gem Line",            cat: "dividers", text: "💎━━━━━━━━━━━━━━━━💎" },
+  { label: "Wavy Skull",          cat: "dividers", text: "☠〜〜〜〜〜〜〜〜〜〜〜〜☠" },
+  { label: "Dot Skulls",          cat: "dividers", text: "· · · ☠ · · · ☠ · · · ☠ · · ·" },
+  { label: "Tilde Stars",         cat: "dividers", text: "~★~★~★~★~★~★~★~★~" },
+  { label: "Plus Stars",          cat: "dividers", text: "✦✧✦✧✦✧✦✧✦✧✦✧✦✧✦" },
+  { label: "Skull & Stars",       cat: "dividers", text: "✧・゚: *✧・゚:* ☠ *:・゚✧*:・゚✧" },
+  { label: "Dots & Diamonds",     cat: "dividers", text: "· · ◆ · · ◆ · · ◆ · ·" },
+  { label: "Hyphen Stars",        cat: "dividers", text: "───── ✦ ─────" },
+  { label: "Long Fancy",          cat: "dividers", text: "━━━━ ⋆⋅☆⋅⋆ ━━━━" },
+  { label: "Pink Sparkle",        cat: "dividers", text: "·˚ ༘₊· ͟͟͞͞꒰➳ ꒱ ₊˚·‧₊" },
+  { label: "Moon Stars",          cat: "dividers", text: "✩₊˚.⋆☾⋆⁺₊✧" },
+  { label: "Pentagram Dots",      cat: "dividers", text: "⛧ · · · · · · · · · · ⛧" },
+  { label: "Classic Border",      cat: "dividers", text: "════════════════════" },
+  { label: "Double Dash",         cat: "dividers", text: "──────────────────" },
+  { label: "Gothic Flourish",     cat: "dividers", text: "❦✦❦✦❦✦❦✦❦✦❦✦❦" },
+
+  // ── BORDERS ──
+  { label: "Skull Box",           cat: "borders", text: "☠ ─────────────── ☠\n│                 │\n☠ ─────────────── ☠" },
+  { label: "Star Frame",          cat: "borders", text: "✦ · · · · · · · · · ✦\n·                   ·\n✦ · · · · · · · · · ✦" },
+  { label: "Gothic Frame",        cat: "borders", text: "╔══════════╗\n║                ║\n╚══════════╝" },
+  { label: "Sparkle Frame",       cat: "borders", text: "✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧\n✦                   ✦\n✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧" },
+  { label: "Thorn Frame",         cat: "borders", text: "┌─❧─────────❧─┐\n│               │\n└─❧─────────❧─┘" },
+  { label: "Dot Frame",           cat: "borders", text: "· ˚ * ˚ · ˚ * ˚ · ˚ *\n·                    ·\n· ˚ * ˚ · ˚ * ˚ · ˚ *" },
+  { label: "Double Border",       cat: "borders", text: "╔════════════╗\n║              ║\n║              ║\n╚════════════╝" },
+  { label: "Sharp Corner Box",    cat: "borders", text: "┌───────────┐\n│             │\n└───────────┘" },
+  { label: "Bracket Box",         cat: "borders", text: "[ ─────────────── ]\n[                   ]\n[ ─────────────── ]" },
+  { label: "Sparkle Border",      cat: "borders", text: "✨━━━━━━━━━━━━━━━✨\n✨                    ✨\n✨━━━━━━━━━━━━━━━✨" },
+
+  // ── NAME STYLES ──
+  { label: "Skull Channel",       cat: "namestyle", text: "☠・name・here" },
+  { label: "Star Channel",        cat: "namestyle", text: "✩・name✩here" },
+  { label: "Heart Channel",       cat: "namestyle", text: "🎔・name・here" },
+  { label: "Pentagram Channel",   cat: "namestyle", text: "⛧ name ⛧" },
+  { label: "Fancy Bracket",       cat: "namestyle", text: "[ name ]" },
+  { label: "Root Path",           cat: "namestyle", text: "［ｒｏｏｔ⁄ name ．ₑₓₑ］" },
+  { label: "Double Bar",          cat: "namestyle", text: "‖ name ‖" },
+  { label: "Kawaii Brackets",     cat: "namestyle", text: "｢ name ｣" },
+  { label: "Gothic Wrap",         cat: "namestyle", text: "⸸ name ⸸" },
+  { label: "Moon Wrap",           cat: "namestyle", text: "☽ name ☾" },
+  { label: "Coffin Wrap",         cat: "namestyle", text: "⚰️ name ⚰️" },
+  { label: "Ankh Wrap",           cat: "namestyle", text: "☥ name ☥" },
+  { label: "Thorn Wrap",          cat: "namestyle", text: "❧ name ❧" },
+  { label: "Bat Wrap",            cat: "namestyle", text: "🦇 name 🦇" },
+  { label: "Web Wrap",            cat: "namestyle", text: "🕸 name 🕸" },
+  { label: "Blood Wrap",          cat: "namestyle", text: "🩸 name 🩸" },
+  { label: "Cross Wrap",          cat: "namestyle", text: "✝ name ✝" },
+  { label: "Diamond Wrap",        cat: "namestyle", text: "◆ name ◆" },
+  { label: "Eye Wrap",            cat: "namestyle", text: "👁 name 👁" },
+  { label: "Sparkle Wrap",        cat: "namestyle", text: "✨ name ✨" },
+  { label: "Star Sparkle",        cat: "namestyle", text: "⭑ name ⭑" },
+  { label: "Flower Wrap",         cat: "namestyle", text: "✿ name ✿" },
+  { label: "Small Skull Dot",     cat: "namestyle", text: "ˑ ☠ ˑ name ˑ ☠ ˑ" },
+  { label: "Tildes",              cat: "namestyle", text: "~~ name ~~" },
+  { label: "Dagger Wrap",         cat: "namestyle", text: "† name †" },
+  { label: "Double Dagger",       cat: "namestyle", text: "‡ name ‡" },
+  { label: "Fancy Parens",        cat: "namestyle", text: "« name »" },
+  { label: "Em Dash Wrap",        cat: "namestyle", text: "— name —" },
+  { label: "Dot Bullet",          cat: "namestyle", text: "• name •" },
+  { label: "Asterism",            cat: "namestyle", text: "⁂ name ⁂" },
+  { label: "Pilcrow Wrap",        cat: "namestyle", text: "¶ name ¶" },
+
+  // ── SPOOKY ──
+  { label: "Ghost",               cat: "spooky", text: "👻" },
+  { label: "Skull",               cat: "spooky", text: "☠️" },
+  { label: "Skull Emoji",         cat: "spooky", text: "💀" },
+  { label: "Bat",                 cat: "spooky", text: "🦇" },
+  { label: "Spider Web",          cat: "spooky", text: "🕸️" },
+  { label: "Spider",              cat: "spooky", text: "🕷️" },
+  { label: "Coffin",              cat: "spooky", text: "⚰️" },
+  { label: "Blood Drop",          cat: "spooky", text: "🩸" },
+  { label: "Moon Crescent L",     cat: "spooky", text: "☽" },
+  { label: "Moon Crescent R",     cat: "spooky", text: "☾" },
+  { label: "Full Moon Face",      cat: "spooky", text: "🌕" },
+  { label: "Waxing Crescent",     cat: "spooky", text: "🌙" },
+  { label: "Ankh",               cat: "spooky", text: "☥" },
+  { label: "Pentagram",           cat: "spooky", text: "⛧" },
+  { label: "Gothic Cross",        cat: "spooky", text: "☩" },
+  { label: "Latin Cross",         cat: "spooky", text: "✝" },
+  { label: "East Cross",          cat: "spooky", text: "♱" },
+  { label: "Dagger",              cat: "spooky", text: "†" },
+  { label: "Double Dagger",       cat: "spooky", text: "‡" },
+  { label: "Scythe",              cat: "spooky", text: "⚔️" },
+  { label: "Poison",              cat: "spooky", text: "☠" },
+  { label: "Eye of Providence",   cat: "spooky", text: "🔱" },
+  { label: "Evil Eye",            cat: "spooky", text: "🧿" },
+  { label: "Candle",              cat: "spooky", text: "🕯️" },
+  { label: "Rose (Wilted)",       cat: "spooky", text: "🥀" },
+  { label: "Crystal Ball",        cat: "spooky", text: "🔮" },
+  { label: "Black Cat",           cat: "spooky", text: "🐈‍⬛" },
+  { label: "Crow/Raven",          cat: "spooky", text: "🦅" },
+  { label: "Jack-O-Lantern",      cat: "spooky", text: "🎃" },
+  { label: "Serpent",             cat: "spooky", text: "🐍" },
+  { label: "Moth",                cat: "spooky", text: "🦋" },
+  { label: "Poison Bottle",       cat: "spooky", text: "🧪" },
+  { label: "Mushroom",            cat: "spooky", text: "🍄" },
+  { label: "Eyeball",             cat: "spooky", text: "👁" },
+  { label: "Hand",                cat: "spooky", text: "🤌" },
+  { label: "Gothic Fleur",        cat: "spooky", text: "⸸" },
+  { label: "Gothic Skull Combo",  cat: "spooky", text: "☠ ⛧ ☠ ⛧ ☠" },
+  { label: "Haunted",             cat: "spooky", text: "👻💀🕷🕸🦇" },
+  { label: "Séance Row",          cat: "spooky", text: "🕯☽ ☠ ☾🕯" },
+  { label: "Witch Kit",           cat: "spooky", text: "🔮🌙🕯✨🌿" },
+
+  // ── STARS & HEARTS ──
+  { label: "Black Star",          cat: "stars", text: "★" },
+  { label: "White Star",          cat: "stars", text: "☆" },
+  { label: "Star Sparkle",        cat: "stars", text: "✦" },
+  { label: "Small Star",          cat: "stars", text: "✧" },
+  { label: "Four Point Star",     cat: "stars", text: "✦✧" },
+  { label: "Six Point Star",      cat: "stars", text: "✶" },
+  { label: "Eight Point Star",    cat: "stars", text: "✴" },
+  { label: "Shooting Star",       cat: "stars", text: "🌠" },
+  { label: "Glitter",             cat: "stars", text: "✨" },
+  { label: "Sparkles Row",        cat: "stars", text: "✨ ✦ ✧ ✦ ✨" },
+  { label: "Star Row",            cat: "stars", text: "★ ☆ ★ ☆ ★" },
+  { label: "Glow Stars",          cat: "stars", text: "⭐🌟✨💫" },
+  { label: "Night Sky",           cat: "stars", text: "✩₊˚.⋆☾⋆⁺₊✧" },
+  { label: "Star Cluster",        cat: "stars", text: "⋆。゚☁︎。⋆。 ゚☾ ゚。⋆" },
+  { label: "Hollow Heart",        cat: "stars", text: "♡" },
+  { label: "Filled Heart",        cat: "stars", text: "♥" },
+  { label: "Black Heart",         cat: "stars", text: "🖤" },
+  { label: "Purple Heart",        cat: "stars", text: "💜" },
+  { label: "Red Heart",           cat: "stars", text: "❤️" },
+  { label: "Broken Heart",        cat: "stars", text: "💔" },
+  { label: "Fancy Heart",         cat: "stars", text: "🎔" },
+  { label: "Heart Row",           cat: "stars", text: "♡ ♥ ♡ ♥ ♡" },
+  { label: "Black Hearts Row",    cat: "stars", text: "🖤 🖤 🖤" },
+  { label: "Heart + Star Mix",    cat: "stars", text: "♡✦♡✦♡" },
+  { label: "Cute Hearts",         cat: "stars", text: "˚₊· ͟͟͞͞➳❥ ·₊˚" },
+
+  // ── KAWAII ──
+  { label: "UwU",                 cat: "kawaii", text: "UwU" },
+  { label: "OwO",                 cat: "kawaii", text: "OwO" },
+  { label: "Tilde Cute",          cat: "kawaii", text: "~(˘▾˘~)" },
+  { label: "Blush",               cat: "kawaii", text: "(˘ε˘)" },
+  { label: "Cute Dot Eyes",       cat: "kawaii", text: "( ˘ ³˘)♥" },
+  { label: "Bunny",               cat: "kawaii", text: "( っ˘ω˘ς )" },
+  { label: "Sparkle Text L",      cat: "kawaii", text: "✧˖°." },
+  { label: "Sparkle Text R",      cat: "kawaii", text: ".°˖✧" },
+  { label: "Soft Glow",           cat: "kawaii", text: "˚₊‧꒰ა ☆ ໒꒱ ‧₊˚" },
+  { label: "Petal",               cat: "kawaii", text: "꒰ ♡ ꒱" },
+  { label: "Flower Bracket",      cat: "kawaii", text: "✿ · · · · · · ✿" },
+  { label: "Sweet Divider",       cat: "kawaii", text: "·˚ ˖ ·̩͙ ✦ ·̩͙ ˖ ˚·" },
+  { label: "Pastel Stars",        cat: "kawaii", text: "⊹₊⟡⋆" },
+  { label: "Clover",              cat: "kawaii", text: "☘" },
+  { label: "Ribbon",              cat: "kawaii", text: "🎀" },
+  { label: "Soft Heart",          cat: "kawaii", text: "ʚ♡ɞ" },
+  { label: "Cloud",               cat: "kawaii", text: "☁️" },
+  { label: "Rainbow",             cat: "kawaii", text: "🌈" },
+  { label: "Candy",               cat: "kawaii", text: "🍭" },
+  { label: "Cake",                cat: "kawaii", text: "🎂" },
+  { label: "Fairy Wand",          cat: "kawaii", text: "✧*｡" },
+  { label: "Cherry Blossoms",     cat: "kawaii", text: "🌸🌸🌸" },
+  { label: "Daisy",               cat: "kawaii", text: "✿ ✾ ✿" },
+  { label: "Glitter Wave",        cat: "kawaii", text: "゜・*:.｡..｡.:*・゜" },
+  { label: "Shooting Stars",      cat: "kawaii", text: "☆彡" },
+  { label: "Angel",               cat: "kawaii", text: "(ノ◕ヮ◕)ノ*:･ﾟ✧" },
+  { label: "Pom Pom",             cat: "kawaii", text: "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧" },
+  { label: "Lollipop Stars",      cat: "kawaii", text: "✦ ˑ ˑ ˑ ✦ ˑ ˑ ˑ ✦" },
+  { label: "Pillow Soft",         cat: "kawaii", text: "꒰꒱ ₊˚ʚ ᗢ₊˚✧ ꒰꒱" },
+
+  // ── KAOMOJI ──
+  { label: "Shruggie",            cat: "kaomoji", text: "¯\\_(ツ)_/¯" },
+  { label: "Table Flip",          cat: "kaomoji", text: "(╯°□°）╯︵ ┻━┻" },
+  { label: "Put Table Back",      cat: "kaomoji", text: "┬─┬ノ( º _ ºノ)" },
+  { label: "Bear",                cat: "kaomoji", text: "ʕ•ᴥ•ʔ" },
+  { label: "Disapproval",         cat: "kaomoji", text: "ಠ_ಠ" },
+  { label: "Lenny Face",          cat: "kaomoji", text: "( ͡° ͜ʖ ͡°)" },
+  { label: "Happy Dance",         cat: "kaomoji", text: "٩(◕‿◕)۶" },
+  { label: "Excited",             cat: "kaomoji", text: "(ﾉ^ヮ^)ﾉ" },
+  { label: "Scared",              cat: "kaomoji", text: "(ʘдʘ)" },
+  { label: "Evil Grin",           cat: "kaomoji", text: "(ಠ‿ಠ)" },
+  { label: "Smug",                cat: "kaomoji", text: "(¬‿¬)" },
+  { label: "Dead Inside",         cat: "kaomoji", text: "(⊙_⊙)" },
+  { label: "Crying",              cat: "kaomoji", text: "(っ˘̩╭╮˘̩)っ" },
+  { label: "Thumbs Up",           cat: "kaomoji", text: "(๑˃ᴗ˂)ﻭ" },
+  { label: "Bow",                 cat: "kaomoji", text: "m(_ _)m" },
+  { label: "Waving",              cat: "kaomoji", text: "( ´ ▽ ` )ノ" },
+  { label: "Running",             cat: "kaomoji", text: "ε=ε=ε=ε=ε=┌(;・_・)┘" },
+  { label: "Sleeping",            cat: "kaomoji", text: "(ᴗ_ ᴗ。)zZZ" },
+  { label: "Witch",               cat: "kaomoji", text: "(ノ◕‿◕)ノ☆" },
+  { label: "Demon",               cat: "kaomoji", text: "⁽⁽◝( •௰• )◜⁾⁾" },
+  { label: "Ghost Face",          cat: "kaomoji", text: "(👻)" },
+  { label: "Skull Face",          cat: "kaomoji", text: "( ☠ )" },
+  { label: "Sad",                 cat: "kaomoji", text: "(-_-。)" },
+  { label: "Blushing",            cat: "kaomoji", text: "(⁄ ⁄•⁄ω⁄•⁄ ⁄)" },
+  { label: "Thinking",            cat: "kaomoji", text: "(¬_¬ )" },
+  { label: "Muscle",              cat: "kaomoji", text: "ᕦ(ò_óˇ)ᕤ" },
+  { label: "Victory",             cat: "kaomoji", text: "( •̀ᴗ•́ )و ̑̑" },
+  { label: "Love Eyes",           cat: "kaomoji", text: "(♡°▽°♡)" },
+  { label: "Peek",                cat: "kaomoji", text: "(。・ω・。)" },
+  { label: "Cat Smile",           cat: "kaomoji", text: "(=^･ω･^=)" },
+
+  // ── SYMBOLS ──
+  { label: "Infinity",            cat: "symbols", text: "∞" },
+  { label: "Fleur de Lis",        cat: "symbols", text: "⚜" },
+  { label: "Trident",             cat: "symbols", text: "⚡" },
+  { label: "Yin Yang",            cat: "symbols", text: "☯" },
+  { label: "Peace",               cat: "symbols", text: "☮" },
+  { label: "Ohm",                 cat: "symbols", text: "ॐ" },
+  { label: "Eye of Horus",        cat: "symbols", text: "𓂀" },
+  { label: "Caduceus",            cat: "symbols", text: "⚕" },
+  { label: "Biohazard",           cat: "symbols", text: "☣" },
+  { label: "Radioactive",         cat: "symbols", text: "☢" },
+  { label: "Skull & Crossbones",  cat: "symbols", text: "☠" },
+  { label: "Curly Bracket L",     cat: "symbols", text: "❰" },
+  { label: "Curly Bracket R",     cat: "symbols", text: "❱" },
+  { label: "Floral Heart",        cat: "symbols", text: "❧" },
+  { label: "Reference Mark",      cat: "symbols", text: "※" },
+  { label: "Section Sign",        cat: "symbols", text: "§" },
+  { label: "Paragraph",           cat: "symbols", text: "¶" },
+  { label: "Copyright",           cat: "symbols", text: "©" },
+  { label: "Registered",          cat: "symbols", text: "®" },
+  { label: "Trademark",           cat: "symbols", text: "™" },
+  { label: "Degree",              cat: "symbols", text: "°" },
+  { label: "Middle Dot",          cat: "symbols", text: "·" },
+  { label: "Bullet",              cat: "symbols", text: "•" },
+  { label: "Em Dash",             cat: "symbols", text: "—" },
+  { label: "Ellipsis",            cat: "symbols", text: "…" },
+  { label: "Interrobang",         cat: "symbols", text: "‽" },
+  { label: "Irony Mark",          cat: "symbols", text: "⸮" },
+  { label: "Asterism",            cat: "symbols", text: "⁂" },
+  { label: "Snowflake",           cat: "symbols", text: "❄" },
+  { label: "Flake Row",           cat: "symbols", text: "❄ ❅ ❆ ❅ ❄" },
+  { label: "Checkmark",           cat: "symbols", text: "✔" },
+  { label: "X Mark",              cat: "symbols", text: "✘" },
+  { label: "Fire",                cat: "symbols", text: "🔥" },
+  { label: "Lightning",           cat: "symbols", text: "⚡" },
+  { label: "Dragon",              cat: "symbols", text: "🐉" },
+  { label: "Sword",               cat: "symbols", text: "🗡" },
+  { label: "Shield",              cat: "symbols", text: "🛡" },
+  { label: "Chains",              cat: "symbols", text: "⛓" },
+
+  // ── ARROWS ──
+  { label: "Right Arrow",         cat: "arrows", text: "→" },
+  { label: "Left Arrow",          cat: "arrows", text: "←" },
+  { label: "Up Arrow",            cat: "arrows", text: "↑" },
+  { label: "Down Arrow",          cat: "arrows", text: "↓" },
+  { label: "Double Right",        cat: "arrows", text: "»" },
+  { label: "Double Left",         cat: "arrows", text: "«" },
+  { label: "Triple Right",        cat: "arrows", text: "»»»" },
+  { label: "Triple Left",         cat: "arrows", text: "«««" },
+  { label: "Fat Right",           cat: "arrows", text: "➔" },
+  { label: "Fancy Right",         cat: "arrows", text: "➳" },
+  { label: "Cursive Arrow",       cat: "arrows", text: "↝" },
+  { label: "Love Arrow",          cat: "arrows", text: "➸" },
+  { label: "Feather Arrow",       cat: "arrows", text: "➾" },
+  { label: "Double Headed",       cat: "arrows", text: "↔" },
+  { label: "Up Down",             cat: "arrows", text: "↕" },
+  { label: "Curved Down",         cat: "arrows", text: "↴" },
+  { label: "Looping",             cat: "arrows", text: "↻" },
+  { label: "Anti-Looping",        cat: "arrows", text: "↺" },
+  { label: "Right with Line",     cat: "arrows", text: "⇒" },
+  { label: "Left with Line",      cat: "arrows", text: "⇐" },
+  { label: "Triangle Right",      cat: "arrows", text: "▶" },
+  { label: "Triangle Left",       cat: "arrows", text: "◀" },
+  { label: "Pointing Right",      cat: "arrows", text: "☞" },
+  { label: "Pointing Left",       cat: "arrows", text: "☜" },
+  { label: "Heart Arrow",         cat: "arrows", text: "↝♡" },
+  { label: "Star Arrow",          cat: "arrows", text: "✦→" },
+  { label: "Squiggly Right",      cat: "arrows", text: "〜→" },
+  { label: "Flow Right",          cat: "arrows", text: "─→" },
+];
+
+// ──────────────────────────────────────────────
+// STATE
+// ──────────────────────────────────────────────
+let activeCategory = 'all';
+let searchQuery = '';
+let toastTimer = null;
+
+// ──────────────────────────────────────────────
+// DOM refs
+// ──────────────────────────────────────────────
+const pageBody   = document.getElementById('pageBody');
+const searchEl   = document.getElementById('search');
+const catBtns    = document.querySelectorAll('.cat-btn');
+const countEl    = document.getElementById('resultCount');
+const toastEl    = document.getElementById('toast');
+
+// ──────────────────────────────────────────────
+// TOAST
+// ──────────────────────────────────────────────
+function showToast(msg) {
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1600);
+}
+
+// ──────────────────────────────────────────────
+// COPY
+// ──────────────────────────────────────────────
+function copyDec(text, cardEl) {
+  navigator.clipboard.writeText(text).then(() => {
+    cardEl.classList.add('copied');
+    setTimeout(() => cardEl.classList.remove('copied'), 400);
+    showToast('✦ Copied! ✦');
+  });
+}
+
+// ──────────────────────────────────────────────
+// RENDER
+// ──────────────────────────────────────────────
+function render() {
+  pageBody.innerHTML = '';
+
+  const q = searchQuery.toLowerCase();
+
+  const filtered = decorations.filter(d => {
+    const catMatch = activeCategory === 'all' || d.cat === activeCategory;
+    const textMatch = !q || d.label.toLowerCase().includes(q) || d.text.toLowerCase().includes(q);
+    return catMatch && textMatch;
+  });
+
+  countEl.textContent = filtered.length + ' decorations';
+
+  if (filtered.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'empty-state';
+    empty.textContent = '☠ no results ☠';
+    pageBody.appendChild(empty);
+    return;
+  }
+
+  // Group by category (respecting filter)
+  const categoryOrder = ['dividers','borders','namestyle','spooky','stars','kawaii','kaomoji','symbols','arrows'];
+  const categoryLabels = {
+    dividers:  '✦ Dividers & Lines',
+    borders:   '☠ Borders & Frames',
+    namestyle: '⛧ Name Styles & Wrappers',
+    spooky:    '🕸 Spooky & Gothic',
+    stars:     '★ Stars & Hearts',
+    kawaii:    '✿ Kawaii',
+    kaomoji:   '(ノ◕ヮ◕)ﾉ Kaomoji',
+    symbols:   '⚜ Symbols',
+    arrows:    '→ Arrows',
+  };
+
+  // If searching or filtering to one category, show flat grid
+  if (q || activeCategory !== 'all') {
+    const grid = document.createElement('div');
+    grid.className = 'card-grid';
+
+    // Optional single-section heading when category is selected
+    if (activeCategory !== 'all' && categoryLabels[activeCategory]) {
+      const heading = document.createElement('div');
+      heading.className = 'section-heading';
+      heading.style.gridColumn = '1/-1';
+      heading.textContent = categoryLabels[activeCategory];
+      grid.appendChild(heading);
+    }
+
+    for (const d of filtered) {
+      grid.appendChild(buildCard(d));
+    }
+    pageBody.appendChild(grid);
+    return;
+  }
+
+  // Group by category
+  const groups = {};
+  for (const d of filtered) {
+    if (!groups[d.cat]) groups[d.cat] = [];
+    groups[d.cat].push(d);
+  }
+
+  for (const cat of categoryOrder) {
+    if (!groups[cat] || groups[cat].length === 0) continue;
+
+    const heading = document.createElement('div');
+    heading.className = 'section-heading';
+    heading.textContent = categoryLabels[cat] || cat;
+    pageBody.appendChild(heading);
+
+    const grid = document.createElement('div');
+    grid.className = 'card-grid';
+    for (const d of groups[cat]) {
+      grid.appendChild(buildCard(d));
+    }
+    pageBody.appendChild(grid);
+  }
+}
+
+function buildCard(d) {
+  const card = document.createElement('div');
+  card.className = 'dec-card';
+
+  // Header row (label + copy button)
+  const header = document.createElement('div');
+  header.className = 'dec-card-header';
+
+  const labelEl = document.createElement('div');
+  labelEl.className = 'dec-label-text';
+  labelEl.textContent = d.label;
+
+  const copyBtn = document.createElement('button');
+  copyBtn.className = 'copy-btn';
+  copyBtn.textContent = 'copy';
+  copyBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    copyDec(d.text, card);
+  });
+
+  header.appendChild(labelEl);
+  header.appendChild(copyBtn);
+
+  // The decoration text itself
+  const textEl = document.createElement('div');
+  textEl.className = 'dec-text';
+  textEl.textContent = d.text;
+
+  card.appendChild(header);
+  card.appendChild(textEl);
+
+  // Clicking anywhere on the card also copies
+  card.addEventListener('click', () => copyDec(d.text, card));
+
+  return card;
+}
+
+// ──────────────────────────────────────────────
+// EVENTS
+// ──────────────────────────────────────────────
+searchEl.addEventListener('input', () => {
+  searchQuery = searchEl.value;
+  render();
+});
+
+catBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    catBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCategory = btn.dataset.cat;
+    render();
+  });
+});
+
+// ──────────────────────────────────────────────
+// INIT
+// ──────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>
