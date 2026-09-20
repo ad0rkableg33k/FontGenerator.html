@@ -203,6 +203,27 @@
     box-shadow: 0 0 8px var(--pink-glow);
   }
 
+  /* ── Back to font generator link ── */
+  .dec-page-link {
+    display: inline-block;
+    margin-top: 0.7rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 0.3rem 1rem;
+    transition: all 0.2s;
+  }
+  .dec-page-link:hover {
+    color: var(--pink);
+    border-color: var(--pink);
+    text-shadow: 0 0 8px var(--pink);
+    background: rgba(255,45,120,0.08);
+    box-shadow: 0 0 10px var(--pink-glow);
+  }
+
   /* ── Main layout ── */
   .page-body {
     max-width: 1600px;
@@ -395,8 +416,6 @@
   <ul class="nav-links">
     <li><a href="https://ad0rkableg33k.github.io/Nightwood-Oracle/" target="_blank">𝕌ηѕ𝕠ℓι𝕔ιтє𝕕 ᦔєᥴк 𝓅𝖎𝒸𝖘|τⲇⲅⲟτ &amp; ⲟⲅⲇⲥⳑⲉ</a></li>
     <li><a href="https://ad0rkableg33k.github.io/realityisbuffering/" target="_blank">яєʌ𝓵ɪтყ ɪѕ вuƒƒєяɪηｇ</a></li>
-    <li><a href="index.html">𝔽𝖔𝖓𝕥 𝕲𝖊𝖓𝖊𝖗𝕒𝕥𝖔𝖗</a></li>
-    <li><a href="decorations.html" class="active">✦ ᦔєᥴ০ᥲɾⲇτɪoηѕ ✦</a></li>
     <li><a href="https://github.com/ad0rkableg33k" target="_blank">ＧｉｔＨＵＢ</a></li>
     <li><a href="https://www.youtube.com/@ad0rkableg33k" target="_blank">ყoυtυbᥱ</a></li>
   </ul>
@@ -406,6 +425,7 @@
   <div class="skull-row">✦ ☠ ⛧ 🕸 ⛧ ☠ ✦</div>
   <h1>✦ Text Decorations ✦</h1>
   <div class="byline">✦ click any card to copy ✦ created by G33KY ✦</div>
+  <a href="index.html" class="dec-page-link">← 𝔽𝖆𝖓𝖈𝕪 𝔽𝖔𝖓𝕥 𝕲𝖊𝖓𝖊𝖗𝕒𝕥𝖔𝖗</a>
   <div class="divider"></div>
 </header>
 
@@ -422,6 +442,9 @@
     <button class="cat-btn" data-cat="kaomoji">Kaomoji</button>
     <button class="cat-btn" data-cat="symbols">Symbols</button>
     <button class="cat-btn" data-cat="arrows">Arrows</button>
+    <button class="cat-btn" data-cat="glitch">Glitch &amp; Game</button>
+    <button class="cat-btn" data-cat="circled">Circled &amp; Boxed</button>
+    <button class="cat-btn" data-cat="greek">Greek &amp; Bold</button>
   </div>
   <span class="result-count" id="resultCount"></span>
 </div>
@@ -718,6 +741,74 @@ const decorations = [
   { label: "Star Arrow",          cat: "arrows", text: "✦→" },
   { label: "Squiggly Right",      cat: "arrows", text: "〜→" },
   { label: "Flow Right",          cat: "arrows", text: "─→" },
+
+  // ── GLITCH & GAME ──
+  { label: "Glitch Runes 1",      cat: "glitch", text: "𐌑ﾼￓￃ" },
+  { label: "Glitch Runes 2",      cat: "glitch", text: "𑨠 ⃤ 🞅𐌢" },
+  { label: "Bullet Combo",        cat: "glitch", text: "￭▴•⨯" },
+  { label: "Game Shapes 1",       cat: "glitch", text: "⯀⁠▲⁠●🞬" },
+  { label: "Triangle Overlay",    cat: "glitch", text: " ⃤⃝ ╳𑨠" },
+  { label: "PlayStat",            cat: "glitch", text: "𝗣𝗹ⵠ𝘆𝗦𝘁ⵠ𝘁𝗶🞅𝗻" },
+  { label: "Old Italic Rune",     cat: "glitch", text: "𐌑" },
+  { label: "Gothic Rune",         cat: "glitch", text: "𐌢" },
+  { label: "Tirhuta Mark",        cat: "glitch", text: "𑨠" },
+  { label: "Combining Triangle",  cat: "glitch", text: " ⃤" },
+  { label: "Combining Circle",    cat: "glitch", text: "⃝" },
+  { label: "Small Ballot X",      cat: "glitch", text: "🞅" },
+  { label: "Bold X",              cat: "glitch", text: "🞬" },
+  { label: "Hollow Square",       cat: "glitch", text: "⯀" },
+  { label: "Game Shapes 2",       cat: "glitch", text: "▴•⨯" },
+  { label: "Cross X",             cat: "glitch", text: "╳" },
+  { label: "Glitch Stack",        cat: "glitch", text: "𐌑ﾼ╳⯀▲●" },
+  { label: "Rune Combo",          cat: "glitch", text: "𐌑𐌢𑨠" },
+  { label: "Rect Bullet",         cat: "glitch", text: "￭" },
+  { label: "Half-width Katakana", cat: "glitch", text: "ﾼ" },
+
+  // ── CIRCLED & BOXED ──
+  { label: "Circled A-B-X-Y",     cat: "circled", text: "🟕🟗⭗Ⓧ" },
+  { label: "Boxed Shapes",        cat: "circled", text: "🟖🟘◉🅧" },
+  { label: "Circled ABXY (white)",cat: "circled", text: "ⒶⒷⓍⓎ" },
+  { label: "Neg Circle ABXY",     cat: "circled", text: "🅐🅑🅧🅨" },
+  { label: "Circled A",           cat: "circled", text: "Ⓐ" },
+  { label: "Circled B",           cat: "circled", text: "Ⓑ" },
+  { label: "Circled X",           cat: "circled", text: "Ⓧ" },
+  { label: "Circled Y",           cat: "circled", text: "Ⓨ" },
+  { label: "Neg Circle A",        cat: "circled", text: "🅐" },
+  { label: "Neg Circle B",        cat: "circled", text: "🅑" },
+  { label: "Neg Circle X",        cat: "circled", text: "🅧" },
+  { label: "Neg Circle Y",        cat: "circled", text: "🅨" },
+  { label: "Diamond Bullet",      cat: "circled", text: "🟕" },
+  { label: "Square Bullet",       cat: "circled", text: "🟗" },
+  { label: "Circled X (open)",    cat: "circled", text: "⭗" },
+  { label: "Boxed X",             cat: "circled", text: "🟖" },
+  { label: "Boxed Circle",        cat: "circled", text: "🟘" },
+  { label: "Bullseye",            cat: "circled", text: "◉" },
+  { label: "Controller Row",      cat: "circled", text: "🟕🟗🟖🟘" },
+  { label: "ABXY Row",            cat: "circled", text: "🅐🅑🅧🅨" },
+
+  // ── GREEK & BOLD MATH ──
+  { label: "Bold Greek Phi x2",   cat: "greek", text: "𝝬ΒΟ𝝬" },
+  { label: "Bold Phi",            cat: "greek", text: "𝝬" },
+  { label: "Greek Beta",          cat: "greek", text: "Β" },
+  { label: "Greek Omicron",       cat: "greek", text: "Ο" },
+  { label: "Alpha",               cat: "greek", text: "Α" },
+  { label: "Gamma",               cat: "greek", text: "Γ" },
+  { label: "Delta",               cat: "greek", text: "Δ" },
+  { label: "Theta",               cat: "greek", text: "Θ" },
+  { label: "Lambda",              cat: "greek", text: "Λ" },
+  { label: "Xi",                  cat: "greek", text: "Ξ" },
+  { label: "Pi",                  cat: "greek", text: "Π" },
+  { label: "Sigma",               cat: "greek", text: "Σ" },
+  { label: "Phi",                 cat: "greek", text: "Φ" },
+  { label: "Psi",                 cat: "greek", text: "Ψ" },
+  { label: "Omega",               cat: "greek", text: "Ω" },
+  { label: "Bold Math Alpha",     cat: "greek", text: "𝝰" },
+  { label: "Bold Math Beta",      cat: "greek", text: "𝝱" },
+  { label: "Bold Math Gamma",     cat: "greek", text: "𝝲" },
+  { label: "Bold Math Delta",     cat: "greek", text: "𝝳" },
+  { label: "Bold Math Omega",     cat: "greek", text: "𝝮" },
+  { label: "Bold Greek Row",      cat: "greek", text: "𝝰𝝱𝝲𝝳𝝮" },
+  { label: "Sigma Row",           cat: "greek", text: "ΣΒΟΦΨ" },
 ];
 
 // ──────────────────────────────────────────────
@@ -782,7 +873,7 @@ function render() {
   }
 
   // Group by category (respecting filter)
-  const categoryOrder = ['dividers','borders','namestyle','spooky','stars','kawaii','kaomoji','symbols','arrows'];
+  const categoryOrder = ['dividers','borders','namestyle','spooky','stars','kawaii','kaomoji','symbols','arrows','glitch','circled','greek'];
   const categoryLabels = {
     dividers:  '✦ Dividers & Lines',
     borders:   '☠ Borders & Frames',
@@ -793,6 +884,9 @@ function render() {
     kaomoji:   '(ノ◕ヮ◕)ﾉ Kaomoji',
     symbols:   '⚜ Symbols',
     arrows:    '→ Arrows',
+    glitch:    '⯀ Glitch & Game',
+    circled:   '🅐 Circled & Boxed',
+    greek:     'Ω Greek & Bold Math',
   };
 
   // If searching or filtering to one category, show flat grid
